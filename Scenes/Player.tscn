@@ -1,0 +1,113 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Scenes/PlayerMovement.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/PlayerCamera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/PlayerDisplay.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Audio/crush_0.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Audio/crush_2.wav" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Audio/crush_1.wav" type="AudioStream" id=7]
+[ext_resource path="res://Scenes/RandomSampler.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Audio/footstep_grass_002.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Audio/wing_flap.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Audio/wing_flap_1.wav" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Audio/turn.wav" type="AudioStream" id=12]
+[ext_resource path="res://Assets/Audio/windloop.wav" type="AudioStream" id=13]
+[ext_resource path="res://Scripts/WindSound.gd" type="Script" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 4.85349 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.657895, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=3]
+min_value = -1.0
+_data = [ Vector2( 0, -1 ), 0.0, 0.0, 0, 0, Vector2( 0.511628, 1 ), 10.9804, 0.0, 0, 0, Vector2( 1, 0.0367647 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 27.8773
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 4 )
+tail_lerp = 0.092
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="PlayerMovement" parent="." instance=ExtResource( 1 )]
+ground_friction = 0.467
+hori_friction = 0.018
+accel = 300.0
+flapforce = 500.0
+gravity = 300.0
+air_friction = 0.064
+glide_amp = 0.3
+glide_conversion_rate = 0.157
+turn_dur = 0.631
+body_path = NodePath("..")
+xmod = SubResource( 2 )
+ymod = SubResource( 3 )
+
+[node name="Stick" type="Position2D" parent="."]
+
+[node name="PlayerCamera" parent="Stick" instance=ExtResource( 2 )]
+limit_bottom = 256
+smoothing_enabled = false
+decay = 0.403
+
+[node name="PlayerDisplay" parent="." instance=ExtResource( 3 )]
+flap_down_dur = 0.252
+flap_up_dur = 0.166
+open_tuck_dur = 0.283
+feet_dur = 0.155
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="HurtArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+shape = SubResource( 4 )
+
+[node name="CrushSounds" parent="." instance=ExtResource( 8 )]
+
+[node name="0" type="AudioStreamPlayer" parent="CrushSounds"]
+stream = ExtResource( 5 )
+
+[node name="1" type="AudioStreamPlayer" parent="CrushSounds"]
+stream = ExtResource( 7 )
+
+[node name="2" type="AudioStreamPlayer" parent="CrushSounds"]
+stream = ExtResource( 6 )
+
+[node name="GrassSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="WingFlap" parent="." instance=ExtResource( 8 )]
+
+[node name="flap0" type="AudioStreamPlayer" parent="WingFlap"]
+stream = ExtResource( 10 )
+
+[node name="flap1" type="AudioStreamPlayer" parent="WingFlap"]
+stream = ExtResource( 11 )
+
+[node name="TurnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+
+[node name="WindSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+autoplay = true
+bus = "Wind"
+script = ExtResource( 14 )
+lower_range = 500.0
+higher_range = 3000.0
+
+[connection signal="turn" from="PlayerMovement" to="." method="_on_PlayerMovement_turn"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="HurtArea" to="." method="_on_HurtArea_body_entered"]

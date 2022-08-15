@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/Sprites/bunny atlas.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/BunnyDisplay.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 40, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 8, 0, 8, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 0, 8, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 16, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 8, 16, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 16, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 0, 8, 8 )
+
+[node name="BunnyDisplay" type="Node2D"]
+z_index = 2
+script = ExtResource( 2 )
+hind_limb_extend = {
+"foot": 1.164,
+"leg": -2.672,
+"thigh": 2.639
+}
+
+[node name="Model" type="Node2D" parent="."]
+scale = Vector2( 16.1173, 16.1173 )
+
+[node name="ModelTransform" type="Node2D" parent="Model"]
+
+[node name="AnchorBody" type="Node2D" parent="Model/ModelTransform"]
+
+[node name="Body" type="Sprite" parent="Model/ModelTransform/AnchorBody"]
+texture = SubResource( 1 )
+
+[node name="AnchorHead" type="Node2D" parent="Model/ModelTransform/AnchorBody/Body"]
+
+[node name="Head" type="Sprite" parent="Model/ModelTransform/AnchorBody/Body/AnchorHead"]
+z_index = 1
+texture = SubResource( 2 )
+offset = Vector2( 1, -1 )
+
+[node name="AnchorEarL" type="Node2D" parent="Model/ModelTransform/AnchorBody/Body/AnchorHead/Head"]
+position = Vector2( -0.5, -1.5 )
+
+[node name="EarL" type="Sprite" parent="Model/ModelTransform/AnchorBody/Body/AnchorHead/Head/AnchorEarL"]
+texture = SubResource( 3 )
+offset = Vector2( -0.5, -0.5 )
+
+[node name="AnchorEarR" type="Node2D" parent="Model/ModelTransform/AnchorBody/Body/AnchorHead/Head"]
+position = Vector2( 0.5, -2.5 )
+
+[node name="EarR" type="Sprite" parent="Model/ModelTransform/AnchorBody/Body/AnchorHead/Head/AnchorEarR"]
+texture = SubResource( 4 )
+offset = Vector2( -0.5, -1.5 )
+
+[node name="AnchorThigh" type="Node2D" parent="Model/ModelTransform/AnchorBody/Body"]
+position = Vector2( -3.5, 4 )
+
+[node name="Thigh" type="Sprite" parent="Model/ModelTransform/AnchorBody/Body/AnchorThigh"]
+texture = SubResource( 5 )
+offset = Vector2( 0.5, 0 )
+
+[node name="AnchorLeg" type="Node2D" parent="Model/ModelTransform/AnchorBody/Body/AnchorThigh/Thigh"]
+position = Vector2( 3.5, 0 )
+rotation = 1.5708
+
+[node name="Leg" type="Sprite" parent="Model/ModelTransform/AnchorBody/Body/AnchorThigh/Thigh/AnchorLeg"]
+texture = SubResource( 6 )
+
+[node name="AnchorFoot" type="Node2D" parent="Model/ModelTransform/AnchorBody/Body/AnchorThigh/Thigh/AnchorLeg/Leg"]
+position = Vector2( 0, 3 )
+rotation = -0.785398
+
+[node name="Foot" type="Sprite" parent="Model/ModelTransform/AnchorBody/Body/AnchorThigh/Thigh/AnchorLeg/Leg/AnchorFoot"]
+texture = SubResource( 7 )
+
+[node name="AnchorFore" type="Node2D" parent="Model/ModelTransform/AnchorBody/Body"]
+position = Vector2( 1, 2 )
+
+[node name="Forearms" type="Sprite" parent="Model/ModelTransform/AnchorBody/Body/AnchorFore"]
+texture = SubResource( 8 )
+offset = Vector2( -1, 0 )
+
+[node name="Tween" type="Tween" parent="."]

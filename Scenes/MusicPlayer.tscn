@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/MusicPlayer.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Audio/panic.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Audio/bass.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Audio/main_loop.wav" type="AudioStream" id=4]
+
+[node name="MusicPlayer" type="Node"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="MainLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+bus = "Main"
+
+[node name="Panic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+bus = "Panic"
+
+[node name="Bass" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+bus = "Bass"
+
+[node name="Tween" type="Tween" parent="."]

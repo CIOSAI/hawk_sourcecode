@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Font/Theleah_72.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/MainTheme.tres" type="Theme" id=2]
+[ext_resource path="res://Scripts/Ready.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Audio/pluck_001.ogg" type="AudioStream" id=4]
+
+[node name="Ready" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.9
+margin_left = -30.5
+margin_right = 30.5
+grow_horizontal = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Flap" type="Label" parent="VBoxContainer"]
+margin_right = 1125.0
+margin_bottom = 132.0
+custom_fonts/font = ExtResource( 1 )
+text = "up to flap"
+align = 1
+
+[node name="Glide" type="Label" parent="VBoxContainer"]
+margin_top = 136.0
+margin_right = 1125.0
+margin_bottom = 268.0
+custom_fonts/font = ExtResource( 1 )
+text = "space to glide"
+align = 1
+
+[node name="Turn" type="Label" parent="VBoxContainer"]
+margin_top = 272.0
+margin_right = 1125.0
+margin_bottom = 404.0
+custom_fonts/font = ExtResource( 1 )
+text = "left/right to turn"
+align = 1
+
+[node name="Bloop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -6.228

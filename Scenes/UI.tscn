@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/UI.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/HeightIndicator.tscn" type="PackedScene" id=2]
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+height_adjust = 0.089
+
+[node name="HeightIndicator" parent="." instance=ExtResource( 2 )]
+margin_left = -157.907
+margin_top = -330.328
+margin_right = -149.907
+margin_bottom = -252.328
+rect_scale = Vector2( 8, 8 )

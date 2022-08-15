@@ -1,0 +1,141 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/MainTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/Font/Theleah_72.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scripts/DeathScreen.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Font/Theleah_64.tres" type="DynamicFont" id=4]
+
+[node name="DeathScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.74902, 0.0666667, 0.317647, 0.203922 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeathMessage" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.9
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 2 )
+text = "how's the dirt taste?"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tags" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -358.0
+margin_top = 359.0
+margin_right = 358.0
+grow_horizontal = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreTag" type="HBoxContainer" parent="Tags"]
+margin_right = 716.0
+margin_bottom = 59.0
+alignment = 2
+
+[node name="Label" type="Label" parent="Tags/ScoreTag"]
+margin_left = 200.0
+margin_right = 616.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 4 )
+text = "bunnies eaten: "
+
+[node name="Score" type="Label" parent="Tags/ScoreTag"]
+margin_left = 620.0
+margin_right = 716.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 4 )
+text = "000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighRecordTag" type="HBoxContainer" parent="Tags"]
+margin_top = 63.0
+margin_right = 716.0
+margin_bottom = 122.0
+alignment = 2
+
+[node name="Label" type="Label" parent="Tags/HighRecordTag"]
+margin_right = 616.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 4 )
+text = "heighest consumption: "
+
+[node name="HighRecord" type="Label" parent="Tags/HighRecordTag"]
+margin_left = 620.0
+margin_right = 716.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 4 )
+text = "000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VeganTag" type="HBoxContainer" parent="Tags"]
+margin_top = 126.0
+margin_right = 716.0
+margin_bottom = 185.0
+alignment = 2
+
+[node name="Label" type="Label" parent="Tags/VeganTag"]
+margin_left = 104.0
+margin_right = 616.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 4 )
+text = "vegans triggered: "
+
+[node name="Vegan" type="Label" parent="Tags/VeganTag"]
+margin_left = 620.0
+margin_right = 716.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 4 )
+text = "000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+anchor_left = 0.1
+anchor_top = 0.9
+anchor_right = 0.9
+anchor_bottom = 0.9
+margin_top = -280.0
+grow_horizontal = 2
+custom_constants/separation = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Retry" type="Button" parent="Buttons"]
+margin_right = 1536.0
+margin_bottom = 140.0
+custom_fonts/font = ExtResource( 2 )
+text = "space to Soar again"
+
+[node name="Quit" type="Button" parent="Buttons"]
+margin_top = 140.0
+margin_right = 1536.0
+margin_bottom = 280.0
+custom_fonts/font = ExtResource( 2 )
+text = "left/right to turn away"
